@@ -23,7 +23,8 @@ const Scanner = (props) => {
 
   const _onDetected = (res) => {
     setBarcode(res.codeResult.code);
-    //stopScanner();
+    console.log(res.codeResult.code);
+    stopScanner();
   };
   const startScanner = () => {
     Quagga.init(
