@@ -1,0 +1,13 @@
+.logo-image {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  width: 100px;
+  height: 100px;
+}
+.logo-image img {
+  /* filter: invert(100%); */
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}

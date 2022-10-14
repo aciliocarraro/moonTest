@@ -5,21 +5,19 @@ import Head from "../Head/Head";
 
 const Home = () => {
   return (
-    <>
+    <div className="home-layout">
       <Head />
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/basket">Basket</Link>
-          </li>
-        </ul>
-      </nav>
+      <div className="d-flex justify-content-around my-2">
+        <div className="py-2 px-3 btn btn-light">
+          <Link to="/">Home</Link>
+        </div>
+        <div className="py-2 px-3 btn btn-light">
+          <Link to="/basket">Basket</Link>
+        </div>
+      </div>
 
       <Outlet />
-    </>
+    </div>
   );
 };
 export default Home;

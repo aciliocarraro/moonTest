@@ -99,9 +99,10 @@ const Scanner = (props) => {
   };
 
   return (
-    <div>
+    <div className="d-flex flex-column align-items-center">
       <h3>Barcode scanner in React</h3>
       <button
+        className="btn btn-success w-25"
         onClick={() => setIsStart((prevStart) => !prevStart)}
         style={{ marginBottom: 20 }}
       >
