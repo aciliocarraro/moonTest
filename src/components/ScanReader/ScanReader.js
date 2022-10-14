@@ -4,6 +4,7 @@ import Quagga from "quagga";
 
 const ScanReader = (props) => {
   const { onDetected } = props;
+
   useEffect(() => {
     Quagga.init(config, (err) => {
       if (err) {
@@ -64,6 +65,12 @@ const ScanReader = (props) => {
   const detected = (result) => {
     onDetected(result.codeResult.code);
     console.log(result.codeResult.code);
+  };
+
+  const stopScanner = () => {
+    Quagga.offProcessed();
+    Quagga.offDetected();
+    Quagga.stop();
   };
   return (
     <div>

@@ -1,0 +1,6 @@
+//quagga & JS
+https://www.youtube.com/watch?v=0vQvAssw2Lg
+
+//quagga & react 
+https://codesandbox.io/s/quagga-js-on-react-forked-ce9pj6?file=/public/index.html
+

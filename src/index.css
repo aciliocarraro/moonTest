@@ -15,18 +15,14 @@ code {
 .App {
   font-family: sans-serif;
   text-align: center;
-  height: 99vh;
-  width: 99vw;
+  /* height: 99vh;
+  width: 99vw; */
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
-.container {
-  position: relative;
-}
-
-.container,
+/* .container,
 #interactive.viewport {
   width: 400px;
   height: 300px;
@@ -45,4 +41,4 @@ video {
 video.drawingBuffer {
   width: 400px;
   height: 300px;
-}
+} */
