@@ -6,7 +6,7 @@ import Head from "../Head/Head";
 const Home = () => {
   return (
     <div className="home-layout">
-      <Head />
+
       <div className="d-flex justify-content-around my-2">
         <div className="py-2 px-3 btn btn-light">
           <Link to="/">Home</Link>
@@ -16,7 +16,7 @@ const Home = () => {
         </div>
       </div>
 
-      <Outlet />
+      {/* <Outlet /> */}
     </div>
   );
 };

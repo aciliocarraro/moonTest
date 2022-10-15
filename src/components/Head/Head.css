@@ -3,3 +3,8 @@
   height: 30vh;
   /* border-radius: 1%; */
 }
+.user-name{
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+}

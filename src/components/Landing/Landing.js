@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import "./Landing.css";
 
 const Landing = (props) => {
+  // const { userName, setUserName } = useContext(UserContext);
+  // console.log('landing', setUserName);
   const [enteredName, setEnteredName] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [validator, setValidator] = useState("d-none");
 
   const nameHandler = (e) => {
-    if (e.target.value.trim().length > 0) {
-      setEnteredName(e.target.value);
-      // setIsValid(true);
-      console.log(e.target.value);
-    }
+    setEnteredName(e.target.value);
+    // setIsValid(true);
+    // console.log(e.target.value);
   };
   const formHandler = (e) => {
     e.preventDefault();
@@ -20,8 +19,9 @@ const Landing = (props) => {
       setIsValid(false);
       return;
     }
-    console.log(enteredName);
-    // props.onSetUserName(enteredName);
+    // console.log(enteredName);
+    // setUserName(enteredName);
+    props.onSetUserName(enteredName);
     setEnteredName("");
   };
   return (
@@ -39,9 +39,8 @@ const Landing = (props) => {
           </label>
           <input
             id="userName"
-            className={`form-control w-100 ${
-              !isValid && "border border-danger"
-            }`}
+            className={`form-control w-100 ${!isValid && "border border-danger"
+              }`}
             type="text"
             placeholder="Name"
             onChange={nameHandler}
@@ -53,10 +52,6 @@ const Landing = (props) => {
           Save name
         </button>
       </form>
-
-      <Link className="btn btn-success mt-5" to="scanner">
-        Scanner
-      </Link>
     </div>
   );
 };

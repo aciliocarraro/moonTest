@@ -6,6 +6,26 @@ const Scanner = (props) => {
   const firstUpdate = useRef(true);
   const [isStart, setIsStart] = useState(false);
   const [barcode, setBarcode] = useState("");
+  const [prodName, setProdName] = useState("");
+
+  const prodNameHandler = (e) => {
+
+    setProdName(e.target.value);
+
+  }
+  const formHandler = (e) => {
+    e.preventDefault();
+    if (prodName.trim().length === 0) {
+      return;
+    }
+    console.log(prodName);
+    props.onAddBarCode({
+      id: Math.random().toString(),
+      barcode: barcode,
+      product_name: prodName
+    });
+    setProdName("");
+  };
 
   useEffect(() => {
     return () => {
@@ -23,8 +43,15 @@ const Scanner = (props) => {
 
   const _onDetected = (res) => {
     setBarcode(res.codeResult.code);
+    setProdName("Product" + Math.floor(Math.random() * 1000))
+    // props.onAddBarCode({
+    //   id: Math.random().toString(),
+    //   barcode: res.codeResult.code,
+    //   product_name: prodName
+    // });
     console.log(res.codeResult.code);
-    stopScanner();
+    // stopScanner();
+    setIsStart(false);
   };
   const startScanner = () => {
     Quagga.init(
@@ -101,6 +128,31 @@ const Scanner = (props) => {
   return (
     <div className="d-flex flex-column align-items-center">
       <h3>Barcode scanner in React</h3>
+      <div>Barcode: {barcode}</div>
+      <form
+        onSubmit={formHandler}
+        className="d-flex flex-column align-items-center w-75"
+      >
+        <div className="mb-3 w-100 ">
+          <label htmlFor="prodName" className="form-label">
+            Product Name
+          </label>
+          <input
+            id="prodName"
+            className={`form-control w-100`}
+            type="text"
+            // placeholder="Name"
+            onChange={prodNameHandler}
+            value={prodName}
+          />
+        </div>
+        <button className="btn btn-dark w-100" type="submit">
+          Save name
+        </button>
+        <button className="btn btn-danger w-100" type="submit">
+          Cancel
+        </button>
+      </form>
       <button
         className="btn btn-success w-25"
         onClick={() => setIsStart((prevStart) => !prevStart)}
@@ -110,7 +162,6 @@ const Scanner = (props) => {
       </button>
       {isStart && (
         <div className="video__container">
-          <div>Barcode: {barcode}</div>
           <div id="scanner-container" />
         </div>
       )}
