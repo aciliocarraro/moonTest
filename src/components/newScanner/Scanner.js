@@ -7,6 +7,7 @@ const Scanner = (props) => {
   const [isStart, setIsStart] = useState(false);
   const [barcode, setBarcode] = useState("");
   const [prodName, setProdName] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
   const prodNameHandler = (e) => {
 
@@ -25,6 +26,8 @@ const Scanner = (props) => {
       product_name: prodName
     });
     setProdName("");
+    setShowForm(false)
+    setBarcode('')
   };
 
   useEffect(() => {
@@ -52,6 +55,7 @@ const Scanner = (props) => {
     console.log(res.codeResult.code);
     // stopScanner();
     setIsStart(false);
+    setShowForm(true);
   };
   const startScanner = () => {
     Quagga.init(
@@ -61,8 +65,6 @@ const Scanner = (props) => {
           target: document.querySelector("#scanner-container"),
           constraints: {
             facingMode: "environment", // or user
-            width: { min: 450 },
-            height: { min: 300 },
           },
         },
         numOfWorkers: navigator.hardwareConcurrency,
@@ -126,35 +128,38 @@ const Scanner = (props) => {
   };
 
   return (
-    <div className="d-flex flex-column align-items-center">
-      <h3>Barcode scanner in React</h3>
-      <div>Barcode: {barcode}</div>
-      <form
-        onSubmit={formHandler}
-        className="d-flex flex-column align-items-center w-75"
-      >
-        <div className="mb-3 w-100 ">
-          <label htmlFor="prodName" className="form-label">
-            Product Name
-          </label>
-          <input
-            id="prodName"
-            className={`form-control w-100`}
-            type="text"
-            // placeholder="Name"
-            onChange={prodNameHandler}
-            value={prodName}
-          />
-        </div>
-        <button className="btn btn-dark w-100" type="submit">
-          Save name
-        </button>
-        <button className="btn btn-danger w-100" type="submit">
-          Cancel
-        </button>
-      </form>
+    <div className="container">
+      <div className="form-container">
+        {(showForm && <form
+          onSubmit={formHandler}
+          className=""
+        >
+          <div className="mb-3 d-flex flex-column align-items-center">
+            <label htmlFor="prodName" className="form-label">
+              Product Name
+            </label>
+            <input
+              id="prodName"
+              className="form-control w-50"
+              type="text"
+              // placeholder="Name"
+              onChange={prodNameHandler}
+              value={prodName}
+            />
+          </div>
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-dark w-25 m-3 g-5" type="submit">
+              Save name
+            </button>
+            <button className="btn btn-danger w-25 m-3" type="submit">
+              Cancel
+            </button>
+          </div>
+        </form>)}
+      </div>
+      {barcode && <div className="m-auto text-center">Barcode: {barcode} </div>}
       <button
-        className="btn btn-success w-25"
+        className="btn btn-success w-25 cam-btn d-block m-auto mt-3"
         onClick={() => setIsStart((prevStart) => !prevStart)}
         style={{ marginBottom: 20 }}
       >

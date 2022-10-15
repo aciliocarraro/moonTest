@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
 // import HomeLayout from "./components/HomeLayout/HomeLayout";
 import Landing from "./components/Landing/Landing";
 import Basket from "./components/Basket/Basket";
@@ -20,24 +20,27 @@ function App() {
   const setUserNameHandler = (userName) => {
     setUserName(userName);
   }
-  const addBarCodeHandler = (barcode) => {
+  const addBarCodeHandler = (newProduct) => {
     setBasket((prevBasketValue) => {
-      return [...prevBasketValue, barcode]
+      return [...prevBasketValue, newProduct]
     })
   }
   return (
+    // nav-link d-flex align-items-center fs-4"
+    //['comun classe', isActive? 'new class: 'other class'].filter(Boolean).join(" ") 
+    //filter is optional
     <BrowserRouter>
       <Head userName={userName} />
       <div className="App">
-        <div className="d-flex justify-content-around my-2">
-          <div className="py-2 px-3 btn btn-light">
-            <Link to="/">Home</Link>
+        <div className="d-flex justify-content-around my-2 nav">
+          <div className="py-2 px-3 nav-item">
+            <NavLink className={({ isActive }) => isActive ? 'text-primary nav-link d-flex align-items-center fs-4' : 'fs-3 nav-link d-flex align-items-center text-dark'} to="/" end><i className="bi bi-house-fill"></i><span> Home </span></NavLink>
           </div>
-          <div className="py-2 px-3 btn btn-light">
-            <Link to="/scanner">Scanner</Link>
+          <div className="py-2 px-3 nav-item">
+            <NavLink className={({ isActive }) => isActive ? 'text-primary nav-link d-flex align-items-center fs-4' : 'fs-3 nav-link d-flex align-items-center text-dark'} to="/scanner"><i className="bi bi-upc-scan"></i><span> Scanner </span></NavLink>
           </div>
-          <div className="py-2 px-3 btn btn-light">
-            <Link to="/basket">Basket</Link>
+          <div className="py-2 px-3 nav-item">
+            <NavLink className={({ isActive }) => isActive ? 'text-primary nav-link d-flex align-items-center fs-4' : 'fs-3 nav-link d-flex align-items-center text-dark'} to="/basket"><i className="bi bi-cart-fill"></i><span> Basket </span></NavLink>
           </div>
         </div>
       </div>

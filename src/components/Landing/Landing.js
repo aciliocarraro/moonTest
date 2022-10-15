@@ -5,12 +5,17 @@ const Landing = (props) => {
   // const { userName, setUserName } = useContext(UserContext);
   // console.log('landing', setUserName);
   const [enteredName, setEnteredName] = useState("");
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
   const [validator, setValidator] = useState("d-none");
 
   const nameHandler = (e) => {
+    if (e.target.value.length > 2) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
     setEnteredName(e.target.value);
-    // setIsValid(true);
+
     // console.log(e.target.value);
   };
   const formHandler = (e) => {
@@ -27,7 +32,7 @@ const Landing = (props) => {
   return (
     <div className="p-2 d-flex flex-column align-items-center">
       <div className="cart-logo p-5">
-        <i className="bi bi-cart-check-fill"></i>
+        <i className="bi bi-cart4"></i>
       </div>
       <form
         onSubmit={formHandler}
@@ -39,16 +44,15 @@ const Landing = (props) => {
           </label>
           <input
             id="userName"
-            className={`form-control w-100 ${!isValid && "border border-danger"
-              }`}
+            className="form-control w-100"
             type="text"
-            placeholder="Name"
+            placeholder="Enter your name"
             onChange={nameHandler}
             value={enteredName}
           />
-          <span className={`${validator}`}></span>
+          {!isValid && <span className="text-danger fs-6">Name should be longer than 2 characters</span>}
         </div>
-        <button className="btn btn-dark w-100" type="submit">
+        <button className="btn btn-dark w-100" type="submit" disabled={!isValid}>
           Save name
         </button>
       </form>
