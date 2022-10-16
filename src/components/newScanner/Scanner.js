@@ -20,11 +20,7 @@ const Scanner = (props) => {
       return;
     }
     console.log(prodName);
-    props.onAddBarCode({
-      id: Math.random().toString(),
-      barcode: barcode,
-      product_name: prodName
-    });
+    props.onAddBarCode(barcode, prodName);
     setProdName("");
     setShowForm(false)
     setBarcode('')

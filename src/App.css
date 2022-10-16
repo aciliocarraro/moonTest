@@ -36,7 +36,13 @@
     transform: rotate(360deg);
   }
 }
+.sup{
+  position: relative;
+  bottom: 1rem;
+  font-size: 60%;
+  background-color: rgb(13,110,253);
+  color: white;
+  border-radius: 30%;
+  padding: 3px;
 
-.red{
-  color: red;
 }
