@@ -9,9 +9,11 @@ const Basket = (props) => {
     let result = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number);
     return result;
   }
+
   const purchaseHandler = () => {
-    // console.log(JSON.stringify(props.basket))
     const basketInfo = props.basket;
+
+    console.log(props.basket);
     fetch('http://localhost/moon_basket/moon_basket_create.php', {
       method: 'POST', // or 'PUT'
       body: JSON.stringify(basketInfo)
@@ -23,18 +25,8 @@ const Basket = (props) => {
       .catch((error) => {
         console.error('Error:', error);
       });
-
+    props.onClearBasket();
   }
-  // const plusHandler = (itemId) => {
-  //   // props.onPlusHandler(itemId);
-  //   console.log(itemId)
-  // }
-  // const minusHandler = (itemId) => {
-  //   // props.onMinusHandler(itemId);
-  //   // console.log(itemId)
-
-
-  // }
 
   const total = () => {
     let sum = 0;
@@ -46,8 +38,8 @@ const Basket = (props) => {
     <div className="container">
       <div className="cart-bg">
         <div className="cart-area row g-0">
-          <div className="basket-area col-lg-8 mb-5 bg-success">
-            <div className="p-5">
+          <div className="basket-area col-lg-8 bg-light rounded-3">
+            <div className="p-4 rounded-3">
               <h1>Shopping Basket</h1>
               <hr className="my-4" />
               {props.basket.length === 0 && <div className="text-center fs-3">There are no articles in this cart</div>}
@@ -71,7 +63,7 @@ const Basket = (props) => {
                       <PlusBtn
                         onClickPlus={props.onPlusItem}
                         id={item.id}
-                      >   <i className="bi bi-dash-square-fill"></i></PlusBtn>
+                      >   <i className="bi bi-plus-square-fill"></i></PlusBtn>
 
                     </div>
                     <div className="col-md-3 col-lg-2 col-xl-2 offsert-lg-1">
@@ -86,28 +78,27 @@ const Basket = (props) => {
               }
             </div>
           </div>
-          <div className="cart-summary col-lg-4 bg-warning">
-            <div className="p-5">
-              <h3 className="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+          <div className="cart-summary col-lg-4 bg-secondary rounded-3">
+            <div className="p-4 rounded-3">
+              <h3 className="fw-bold mb-2 mt-2 pt-1">Summary</h3>
               <hr className="my-4"></hr>
-              <div className="d-flex justify-content-between mb-4">
+              <div className="d-flex justify-content-between mb-2">
                 <h5 className="text-uppercase">Total items </h5>
                 <h5>{props.totalItems}</h5>
               </div>
-              <div className="d-flex justify-content-between mb-5">
+              <div className="d-flex justify-content-between mb-2">
                 <h5 className="text-uppercase">Total price</h5>
-                <h5>€ {total()}</h5>
+                <h5>{currencyFormater(total())}</h5>
+              </div>
+              <div className="d-flex justify-content-center mt-5">
+                {props.basket.length > 0 && (<button className="btn btn-danger px-4 fs-4" onClick={purchaseHandler}> <i className="bi bi-cart-check-fill"></i> Checkout
+                </button>)}
               </div>
             </div>
           </div>
 
         </div>
       </div>  {/*end cart-container*/}
-      <div className="d-flex justify-content-center">
-        <button className="btn btn-danger px-4 fs-4" onClick={purchaseHandler}> <i className="bi bi-cart-check-fill"></i> Checkout
-        </button>
-      </div>
-
     </div>
   );
 };

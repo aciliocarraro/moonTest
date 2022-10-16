@@ -130,10 +130,13 @@ const Scanner = (props) => {
           onSubmit={formHandler}
           className=""
         >
-          <div className="mb-3 d-flex flex-column align-items-center">
-            <label htmlFor="prodName" className="form-label">
-              Product Name
-            </label>
+          <div className="d-flex flex-column align-items-center">
+            <div className="text-start">
+              <label htmlFor="prodName" className="form-label fs-4">
+                Product Name
+              </label>
+            </div>
+
             <input
               id="prodName"
               className="form-control w-50"
@@ -144,18 +147,18 @@ const Scanner = (props) => {
             />
           </div>
           <div className="d-flex justify-content-center">
-            <button className="btn btn-dark w-25 m-3 g-5" type="submit">
-              Save name
+            <button className="btn btn-dark w-25 my-3 py-2 fs-4" type="submit">
+              Save product name
             </button>
-            <button className="btn btn-danger w-25 m-3" type="submit">
+            {/* <button className="btn btn-danger w-25 m-3" type="submit">
               Cancel
-            </button>
+            </button> */}
           </div>
         </form>)}
       </div>
-      {barcode && <div className="m-auto text-center">Barcode: {barcode} </div>}
+      {barcode && <div className="m-auto text-center fs-4">Barcode Scanned: {barcode} </div>}
       <button
-        className="btn btn-success w-25 cam-btn d-block m-auto mt-3"
+        className={`btn w-50 py-2 fs-3 fw-bold cam-btn d-block m-auto mt-3 ${isStart ? "btn-danger" : "btn-success"}`}
         onClick={() => setIsStart((prevStart) => !prevStart)}
         style={{ marginBottom: 20 }}
       >

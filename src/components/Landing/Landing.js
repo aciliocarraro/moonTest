@@ -6,7 +6,6 @@ const Landing = (props) => {
   // console.log('landing', setUserName);
   const [enteredName, setEnteredName] = useState("");
   const [isValid, setIsValid] = useState(false);
-  const [validator, setValidator] = useState("d-none");
 
   const nameHandler = (e) => {
     if (e.target.value.length > 2) {
@@ -31,7 +30,7 @@ const Landing = (props) => {
   };
   return (
     <div className="p-2 d-flex flex-column align-items-center">
-      <div className="cart-logo p-5">
+      <div className="cart-logo p-2">
         <i className="bi bi-cart4"></i>
       </div>
       <form
@@ -50,10 +49,11 @@ const Landing = (props) => {
             onChange={nameHandler}
             value={enteredName}
           />
-          {!isValid && <span className="text-danger fs-6">Name should be longer than 2 characters</span>}
+          <p className={`text-danger ${!isValid ? 'visible' : 'invisible'}`}> Name should be longer than 2 characters</p>
+
         </div>
-        <button className="btn btn-dark w-100" type="submit" disabled={!isValid}>
-          Save name
+        <button className="btn btn-dark w-50 py-2 fs-3 fw-bold" type="submit" disabled={!isValid}>
+          Login
         </button>
       </form>
     </div>

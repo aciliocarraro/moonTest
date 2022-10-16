@@ -8,7 +8,7 @@ const MinusBtn = (props) => {
     }
 
     return (
-        <button className="btn btn-link px-2" onClick={minusHandler}>
+        <button className="btn px-2" onClick={minusHandler}>
             {props.children}
         </button>
     )

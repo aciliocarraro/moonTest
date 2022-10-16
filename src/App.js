@@ -17,7 +17,7 @@ function App() {
   }
 
   const [userName, setUserName] = useState('User');
-  const [basketQtt, setBasketQtt] = useState(0);
+
   const [basket, setBasket] = useState([
     // {
     //   id: unId(),
@@ -28,34 +28,39 @@ function App() {
     // }
   ]);
 
-  // console.log(basket);
-
   const setUserNameHandler = (userName) => {
     setUserName(userName);
   }
   const minusHandler = (itemId) => {
     // console.log('minus', itemId)
-    setBasket((prevArray) => {
-      const product = prevArray.find((item) => item.id == itemId);
-      if (product.product_qtty == 1) {
-        const newArray = prevArray.filter((item) => item.id !== itemId);
-        return newArray;
-      } else {
-        product.product_qtty--;
-        return prevArray;
+    const index = basket.findIndex(item => item.id == itemId);
+    const tempArray = [...basket];
+    if (tempArray[index].product_qtty == 1) {
+      tempArray.splice(index, 1);
+      setBasket(tempArray);
+      return
+    }
+    else {
+      if (index >= 0) {
+        tempArray[index].product_qtty--;
+        setBasket(tempArray)
+        return
       }
-
-    })
-    console.log(basket);
+    }
   }
+
   const plusHandler = (itemId) => {
-    console.log('plus', itemId)
-    setBasket((prevArray) => {
-      const product = prevArray.find((item) => item.id == itemId);
-      product.product_qtty++;
-      return prevArray;
-    })
-    console.log(basket);
+    const index = basket.findIndex(item => item.id == itemId);
+    const tempArray = [...basket];
+    if (index >= 0) {
+      tempArray[index].product_qtty++;
+      setBasket(tempArray)
+      return
+    }
+  }
+  const clearBasket = () => {
+    setBasket([]);
+    alert('Thank you for shopping with us ');
   }
 
   const totalItems = () => {
@@ -64,6 +69,14 @@ function App() {
     return sum;
   }
   const addBarCodeHandler = (barcode, prodName) => {
+    //this code must be commented out if there is no product list
+    // const index = basket.findIndex(item => item.barcode == barcode)
+    // const tempList = [...basket]
+    // if (index >= 0) {
+    //   tempList[index].product_qtty++
+    //   setBasket(tempList)
+    //   return
+    // }
     setBasket((prevBasketValue) => {
       return [...prevBasketValue, {
         id: unId(),
@@ -74,33 +87,33 @@ function App() {
       }]
     })
     console.log(totalItems());
-    setBasketQtt((prevValue) => {
-      return prevValue * totalItems();
-    });
+    // setBasketQtt((prevValue) => {
+    //   return prevValue * totalItems();
+    // });
   }
   return (
     // nav-link d-flex align-items-center fs-4"
-    //['comun classe', isActive? 'new class: 'other class'].filter(Boolean).join(" ") 
+    //['nav-link d-flex align-items-center', isActive? 'text-primary fs-4': 'fs-3'].filter(Boolean).join(" ") 
     //filter is optional
     <BrowserRouter>
       <Head userName={userName} />
       <div className="App">
-        <div className="d-flex justify-content-around my-2 nav">
+        <div className="d-flex justify-content-around nav">
           <div className="py-2 px-3 nav-item">
-            <NavLink className={({ isActive }) => isActive ? 'text-primary nav-link d-flex align-items-center fs-4' : 'fs-3 nav-link d-flex align-items-center text-dark'} to="/" end><i className="bi bi-house-fill"></i><span> Home </span></NavLink>
+            <NavLink className={({ isActive }) => ['nav-link d-flex align-items-center', isActive ? 'text-primary fs-3' : 'text-dark fs-4'].filter(Boolean).join(" ")} to="/" end><i className="bi bi-house-fill"></i><span> Home </span></NavLink>
           </div>
           <div className="py-2 px-3 nav-item">
-            <NavLink className={({ isActive }) => isActive ? 'text-primary nav-link d-flex align-items-center fs-4' : 'fs-3 nav-link d-flex align-items-center text-dark'} to="/scanner"><i className="bi bi-upc-scan"></i><span> Scanner </span></NavLink>
+            <NavLink className={({ isActive }) => ['nav-link d-flex align-items-center', isActive ? 'text-primary fs-3' : 'text-dark fs-4'].filter(Boolean).join(" ")} to="/scanner"><i className="bi bi-upc-scan"></i><span> Scanner </span></NavLink>
           </div>
           <div className="py-2 px-3 nav-item">
-            <NavLink className={({ isActive }) => isActive ? 'text-primary nav-link d-flex align-items-center fs-4' : 'fs-3 nav-link d-flex align-items-center text-dark'} to="/basket"><i className="bi bi-cart-fill"></i><span> Basket </span>{basketQtt > 0 && <span className="sup">{basketQtt}</span>}</NavLink>
+            <NavLink className={({ isActive }) => ['nav-link d-flex align-items-center', isActive ? 'text-primary fs-3' : 'text-dark fs-4'].filter(Boolean).join(" ")} to="/basket"><i className="bi bi-cart-fill"></i><span> Basket </span>{totalItems() > 0 && <span className="sup">{totalItems()}</span>}</NavLink>
           </div>
         </div>
       </div>
       <Routes>
         <Route index element={<Landing onSetUserName={setUserNameHandler} />} />
         <Route path="scanner" element={<Scanner onAddBarCode={addBarCodeHandler} />} />
-        <Route path="basket" element={<Basket basket={basket} totalItems={totalItems()} onMinusItem={minusHandler} onPlusItem={plusHandler} />} />
+        <Route path="basket" element={<Basket basket={basket} totalItems={totalItems()} onMinusItem={minusHandler} onPlusItem={plusHandler} onClearBasket={clearBasket} />} />
       </Routes>
     </BrowserRouter>
   );
