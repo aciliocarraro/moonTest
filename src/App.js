@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 
-import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 // import HomeLayout from "./components/HomeLayout/HomeLayout";
 import Landing from "./components/Landing/Landing";
 import Basket from "./components/Basket/Basket";
@@ -43,9 +43,9 @@ function App() {
   }
   const minusHandler = (itemId) => {
     // console.log('minus', itemId)
-    const index = basket.findIndex(item => item.id == itemId);
+    const index = basket.findIndex(item => item.id === itemId);
     const tempArray = [...basket];
-    if (tempArray[index].product_qtty == 1) {
+    if (tempArray[index].product_qtty === 1) {
       tempArray.splice(index, 1);
       setBasket(tempArray);
       return
@@ -60,7 +60,7 @@ function App() {
   }
 
   const plusHandler = (itemId) => {
-    const index = basket.findIndex(item => item.id == itemId);
+    const index = basket.findIndex(item => item.id === itemId);
     const tempArray = [...basket];
     if (index >= 0) {
       tempArray[index].product_qtty++;

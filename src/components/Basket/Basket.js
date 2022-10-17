@@ -39,8 +39,8 @@ const Basket = (props) => {
   return (
     <div className="container">
       <div className="cart-bg">
-        <div className="cart-area row g-0">
-          <div className="basket-area col-lg-8 bg-light rounded-3">
+        <div className="cart-area row g-3">
+          <div className="basket-area col-lg-8 rounded-3">
             <div className="p-4 rounded-3">
               <h1 className="text-center">Shopping Basket</h1>
               <hr className="my-4" />
@@ -48,28 +48,27 @@ const Basket = (props) => {
               {
                 props.basket.map((item) => (
                   <div className="row mb-4 justify-content-between align-items-center" key={item.id}>
-                    <div className="col-md-2 col-lg-2 col-xl-2">
-                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp" className="img-fluid rounded-3" alt="Cotton T-shirt" />
+                    <div className="col-md-2 col-lg-2 col-xl-2 text-center mb-2">
+                      <img src="./img/product-image-placeholder.jpg" className="cart-img rounded-3 border border-dark" alt="Cotton T-shirt" />
                     </div>
                     <div className="col-md-3 col-lg-3 col-xl-3">
-                      <h6 className="text-muted">{item.product_name}</h6>
+                      <h4 className="text-muted">{item.product_name}</h4>
                       <h6 className="text-black mb-0">Barcode {item.barcode}</h6>
                       <h6 className="text-black mb-0">Id {item.id}</h6>
                     </div>
-                    <div className="col-md-3 col-lg-3 col-xl-3 d-flex justify-content-center align-items-center">
+                    <div className="col-md-3 col-lg-3 col-xl-3 plusMinusContainer dFlex justify-content-center align-items-center">
                       <MinusBtn
                         onClickMinus={props.onMinusItem}
                         id={item.id}
                       >   <i className="bi bi-dash-square-fill"></i></MinusBtn>
-                      <p className="bg-white p-2 fw-bold">{item.product_qtty}</p>
+                      <p className="bg-white fw-bold m-0 fs-5">{item.product_qtty}</p>
                       <PlusBtn
                         onClickPlus={props.onPlusItem}
                         id={item.id}
                       >   <i className="bi bi-plus-square-fill"></i></PlusBtn>
-
                     </div>
-                    <div className="col-md-3 col-lg-2 col-xl-2 offsert-lg-1">
-                      <h6 className="mb-0">{currencyFormater(item.product_price)}</h6>
+                    <div className="col-md-3 col-lg-2 col-xl-2 text-end">
+                      <h4 className="mb-0">{currencyFormater(item.product_price)}</h4>
                     </div>
                     <div className="col-md-1 col-lg-1 col-xl-1 text-end">
                       <a href="#!" className="text-muted"><i className="fas fa-times"></i></a>
@@ -80,19 +79,19 @@ const Basket = (props) => {
               }
             </div>
           </div>
-          <div className="cart-summary col-lg-4 bg-secondary rounded-3">
+          <div className="cart-summary col-lg-4 rounded-3">
             <div className="p-4 rounded-3">
               <h3 className="fw-bold mb-2 mt-2 pt-1 text-center">Summary</h3>
               <hr className="my-4"></hr>
-              <div className="d-flex justify-content-between mb-2">
+              <div className="dFlex justify-content-between align-items-center mb-2">
                 <h5 className="text-uppercase">Total items </h5>
                 <h5>{props.totalItems}</h5>
               </div>
-              <div className="d-flex justify-content-between mb-2">
+              <div className="dFlex justify-content-between align-items-center mb-2">
                 <h5 className="text-uppercase">Total price</h5>
                 <h5>{currencyFormater(total())}</h5>
               </div>
-              <div className="d-flex justify-content-center mt-5">
+              <div className="dFlex justify-content-center align-items-center mt-5">
                 {props.basket.length > 0 && (<button className="btn btn-danger px-4 fs-4" onClick={purchaseHandler}> <i className="bi bi-cart-check-fill"></i> Checkout
                 </button>)}
               </div>

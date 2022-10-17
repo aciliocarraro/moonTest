@@ -8,7 +8,7 @@ const PlusBtn = (props) => {
     }
 
     return (
-        <button className="btn px-2" onClick={PlusHandler}>
+        <button className="btn px-2 fs-5" onClick={PlusHandler}>
             {props.children}
         </button>
     )

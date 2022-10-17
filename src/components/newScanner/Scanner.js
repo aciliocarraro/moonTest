@@ -30,7 +30,7 @@ const Scanner = (props) => {
     return () => {
       if (isStart) stopScanner();
     };
-  }, []);
+  }, [isStart]);
   useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
@@ -126,9 +126,11 @@ const Scanner = (props) => {
   return (
     <div className="container">
       <div className="form-container">
-        {(!isStart &&
-          <div className="dummy-scanner">
-
+        {(!showForm &&
+          <div className="dummy-scanner-cont">
+            <div className="dummy-scanner">
+              <img src="/img/barcode-scan.jpg" alt="barcode" />
+            </div>
           </div>
 
         )}

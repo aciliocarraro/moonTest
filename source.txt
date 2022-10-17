@@ -7,3 +7,12 @@ https://codesandbox.io/s/quagga-js-on-react-forked-ce9pj6?file=/public/index.htm
 https://www.cluemediator.com/barcode-scanner-in-react
 //this example has a stop
 
+user
+aciliocodefactor_moon_user
+CodeMoon1+
+
+db 
+aciliocodefactor_moon_basket
+
+https://acilio.codefactory.live/moon_basket/moon_basket_create.php
+
