@@ -126,39 +126,35 @@ const Scanner = (props) => {
   return (
     <div className="container">
       <div className="form-container">
-        {(showForm && <form
-          onSubmit={formHandler}
-          className=""
-        >
-          <div className="d-flex flex-column align-items-center">
-            <div className="text-start">
-              <label htmlFor="prodName" className="form-label fs-4">
-                Product Name
-              </label>
-            </div>
+        {(!isStart &&
+          <div className="dummy-scanner">
 
+          </div>
+
+        )}
+        {(showForm && <form onSubmit={formHandler}>
+          <legend>Product Name</legend>
+          <div>
             <input
               id="prodName"
-              className="form-control w-50"
+              className="form-control"
               type="text"
-              // placeholder="Name"
               onChange={prodNameHandler}
               value={prodName}
             />
           </div>
-          <div className="d-flex justify-content-center">
-            <button className="btn btn-dark w-25 my-3 py-2 fs-4" type="submit">
+          <div className="btn-wrapper">
+            <button className="btn btn-dark btn-75 my-3 py-2 fs-4" type="submit">
               Save product name
             </button>
-            {/* <button className="btn btn-danger w-25 m-3" type="submit">
-              Cancel
-            </button> */}
           </div>
-        </form>)}
+
+        </form>
+        )}
       </div>
       {barcode && <div className="m-auto text-center fs-4">Barcode Scanned: {barcode} </div>}
       <button
-        className={`btn w-50 py-2 fs-3 fw-bold cam-btn d-block m-auto mt-3 ${isStart ? "btn-danger" : "btn-success"}`}
+        className={`btn btn-75 py-2 fs-3 fw-bold d-block m-auto mt-3 ${isStart ? "btn-danger" : "btn-success"}`}
         onClick={() => setIsStart((prevStart) => !prevStart)}
         style={{ marginBottom: 20 }}
       >

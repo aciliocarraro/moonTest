@@ -5,6 +5,8 @@
 }
 .user-name{
   position: absolute;
-  left: 2rem;
-  bottom: 2rem;
+  bottom: 0;
+  width: 100%; 
+  display: flex;
+  justify-content: flex-start;
 }

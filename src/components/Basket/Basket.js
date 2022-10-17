@@ -3,7 +3,6 @@ import "./Basket.css";
 import MinusBtn from "./MinusBtn";
 import PlusBtn from "./PlusBtn";
 
-
 const Basket = (props) => {
   const currencyFormater = (number) => {
     let result = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number);
@@ -12,11 +11,14 @@ const Basket = (props) => {
 
   const purchaseHandler = () => {
     const basketInfo = props.basket;
-
-    console.log(props.basket);
+    // console.log(basketInfo);
+    const userData = props.userData;
+    // console.log(userData);
+    const purchaseData = [basketInfo, ...userData];
+    console.log(JSON.stringify(purchaseData));
     fetch('http://localhost/moon_basket/moon_basket_create.php', {
       method: 'POST', // or 'PUT'
-      body: JSON.stringify(basketInfo)
+      body: JSON.stringify(purchaseData)
     })
       .then((response) => response.json())
       .then((data) => {
@@ -40,7 +42,7 @@ const Basket = (props) => {
         <div className="cart-area row g-0">
           <div className="basket-area col-lg-8 bg-light rounded-3">
             <div className="p-4 rounded-3">
-              <h1>Shopping Basket</h1>
+              <h1 className="text-center">Shopping Basket</h1>
               <hr className="my-4" />
               {props.basket.length === 0 && <div className="text-center fs-3">There are no articles in this cart</div>}
               {
@@ -80,7 +82,7 @@ const Basket = (props) => {
           </div>
           <div className="cart-summary col-lg-4 bg-secondary rounded-3">
             <div className="p-4 rounded-3">
-              <h3 className="fw-bold mb-2 mt-2 pt-1">Summary</h3>
+              <h3 className="fw-bold mb-2 mt-2 pt-1 text-center">Summary</h3>
               <hr className="my-4"></hr>
               <div className="d-flex justify-content-between mb-2">
                 <h5 className="text-uppercase">Total items </h5>

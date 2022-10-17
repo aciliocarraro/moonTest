@@ -29,13 +29,12 @@ const Landing = (props) => {
     setEnteredName("");
   };
   return (
-    <div className="p-2 d-flex flex-column align-items-center">
-      <div className="cart-logo p-2">
+    <div className="container">
+      <div className="cart-logo p-2 text-center">
         <i className="bi bi-cart4"></i>
       </div>
       <form
         onSubmit={formHandler}
-        className="d-flex flex-column align-items-center w-75"
       >
         <div className="mb-3 w-100 ">
           <label htmlFor="userName" className="form-label">
@@ -43,16 +42,16 @@ const Landing = (props) => {
           </label>
           <input
             id="userName"
-            className="form-control w-100"
+            className="form-control"
             type="text"
             placeholder="Enter your name"
             onChange={nameHandler}
             value={enteredName}
           />
-          <p className={`text-danger ${!isValid ? 'visible' : 'invisible'}`}> Name should be longer than 2 characters</p>
+          <p className={`text-danger ${!isValid ? 'visible' : 'invisible'}`}>It must be longer than 2 characters</p>
 
         </div>
-        <button className="btn btn-dark w-50 py-2 fs-3 fw-bold" type="submit" disabled={!isValid}>
+        <button className="btn btn-dark btn-75 py-2 fs-3 fw-bold cam-btn d-block m-auto mt-3" type="submit" disabled={!isValid}>
           Login
         </button>
       </form>

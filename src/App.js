@@ -16,7 +16,12 @@ function App() {
     return id;
   }
 
-  const [userName, setUserName] = useState('User');
+  const [userData, setUserData] = useState([
+    {
+      id: 0,
+      name: 'User'
+    }
+  ]);
 
   const [basket, setBasket] = useState([
     // {
@@ -28,8 +33,13 @@ function App() {
     // }
   ]);
 
-  const setUserNameHandler = (userName) => {
-    setUserName(userName);
+  const setUserDataHandler = (userName) => {
+    setUserData(() => {
+      return [{
+        id: unId(),
+        name: userName
+      }]
+    });
   }
   const minusHandler = (itemId) => {
     // console.log('minus', itemId)
@@ -96,24 +106,24 @@ function App() {
     //['nav-link d-flex align-items-center', isActive? 'text-primary fs-4': 'fs-3'].filter(Boolean).join(" ") 
     //filter is optional
     <BrowserRouter>
-      <Head userName={userName} />
-      <div className="App">
-        <div className="d-flex justify-content-around nav">
-          <div className="py-2 px-3 nav-item">
-            <NavLink className={({ isActive }) => ['nav-link d-flex align-items-center', isActive ? 'text-primary fs-3' : 'text-dark fs-4'].filter(Boolean).join(" ")} to="/" end><i className="bi bi-house-fill"></i><span> Home </span></NavLink>
+      <Head userData={userData} />
+      <div className="app-container">
+        <div className="landing-nav">
+          <div className="nav-item">
+            <NavLink className={({ isActive }) => ['nav-item d-flex align-items-center', isActive ? 'text-primary fs-3' : 'text-dark fs-4'].filter(Boolean).join(" ")} to="/" end><i className="bi bi-house-fill fs-1"></i><span className="px-2">Home </span></NavLink>
           </div>
-          <div className="py-2 px-3 nav-item">
-            <NavLink className={({ isActive }) => ['nav-link d-flex align-items-center', isActive ? 'text-primary fs-3' : 'text-dark fs-4'].filter(Boolean).join(" ")} to="/scanner"><i className="bi bi-upc-scan"></i><span> Scanner </span></NavLink>
+          <div className="nav-item">
+            <NavLink className={({ isActive }) => ['nav-item d-flex align-items-center', isActive ? 'text-primary fs-3' : 'text-dark fs-4'].filter(Boolean).join(" ")} to="/scanner"><i className="bi bi-upc-scan fs-1"></i><span className="px-2">Scanner </span></NavLink>
           </div>
-          <div className="py-2 px-3 nav-item">
-            <NavLink className={({ isActive }) => ['nav-link d-flex align-items-center', isActive ? 'text-primary fs-3' : 'text-dark fs-4'].filter(Boolean).join(" ")} to="/basket"><i className="bi bi-cart-fill"></i><span> Basket </span>{totalItems() > 0 && <span className="sup">{totalItems()}</span>}</NavLink>
+          <div className="nav-item">
+            <NavLink className={({ isActive }) => ['nav-item d-flex align-items-center', isActive ? 'text-primary fs-3' : 'text-dark fs-4'].filter(Boolean).join(" ")} to="/basket"><i className="bi bi-cart-fill fs-1"></i><span className="px-2 basket-link-text">Basket {totalItems() > 0 && <span className="sup">{totalItems()}</span>}</span></NavLink>
           </div>
         </div>
       </div>
       <Routes>
-        <Route index element={<Landing onSetUserName={setUserNameHandler} />} />
+        <Route index element={<Landing onSetUserName={setUserDataHandler} />} />
         <Route path="scanner" element={<Scanner onAddBarCode={addBarCodeHandler} />} />
-        <Route path="basket" element={<Basket basket={basket} totalItems={totalItems()} onMinusItem={minusHandler} onPlusItem={plusHandler} onClearBasket={clearBasket} />} />
+        <Route path="basket" element={<Basket basket={basket} userData={userData} totalItems={totalItems()} onMinusItem={minusHandler} onPlusItem={plusHandler} onClearBasket={clearBasket} />} />
       </Routes>
     </BrowserRouter>
   );
