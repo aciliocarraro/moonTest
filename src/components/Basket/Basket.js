@@ -40,8 +40,8 @@ const Basket = (props) => {
     <div className="container">
       <div className="cart-bg">
         <div className="cart-area row g-3">
-          <div className="basket-area col-lg-8 rounded-3">
-            <div className="p-4 rounded-3">
+          <div className="col-lg-8 rounded-3">
+            <div className="basket-area p-4 rounded-3">
               <h1 className="text-center">Shopping Basket</h1>
               <hr className="my-4" />
               {props.basket.length === 0 && <div className="text-center fs-3">There are no articles in this cart</div>}
@@ -61,7 +61,7 @@ const Basket = (props) => {
                         onClickMinus={props.onMinusItem}
                         id={item.id}
                       >   <i className="bi bi-dash-square-fill"></i></MinusBtn>
-                      <p className="bg-white fw-bold m-0 fs-5">{item.product_qtty}</p>
+                      <p className="bg-white p-2 fw-bold m-0 fs-5 rounded-2">{item.product_qtty}</p>
                       <PlusBtn
                         onClickPlus={props.onPlusItem}
                         id={item.id}
@@ -79,8 +79,8 @@ const Basket = (props) => {
               }
             </div>
           </div>
-          <div className="cart-summary col-lg-4 rounded-3">
-            <div className="p-4 rounded-3">
+          <div className=" col-lg-4 rounded-3">
+            <div className="cart-summary p-4 rounded-3">
               <h3 className="fw-bold mb-2 mt-2 pt-1 text-center">Summary</h3>
               <hr className="my-4"></hr>
               <div className="dFlex justify-content-between align-items-center mb-2">
